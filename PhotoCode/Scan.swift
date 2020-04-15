@@ -31,6 +31,7 @@ struct Scan: View {
 
         }.onAppear {
             self.showCaptureImageView.toggle()
+            print(self.useCamera)
         }
     }
 }

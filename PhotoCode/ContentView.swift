@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var useCamera = true
+    @State var showCamera = false
+    @State var showLib = false
     var body: some View {
+        NavigationView{
         VStack{
-        Spacer(minLength: 40)
+        
         Text("P H O T O C O D E")
         .bold()
             .font(.title)
@@ -38,13 +42,21 @@ struct ContentView: View {
                 .foregroundColor(Color("green"))
                 .frame(width: 150, height: 150)
                 .padding()
+                .onTapGesture {
+                    self.showCamera.toggle()
+                    self.useCamera = true
+                }
             VStack{
             Image(systemName: "camera.fill")
                 .foregroundColor(.white)
                 .font(.title)
-            Text("Camera")
-                    .foregroundColor(.white)
-                    .font(.title)
+                
+                NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showCamera) {
+                    Text("Camera")
+                        .foregroundColor(.white)
+                        .font(.title)
+                }
+            
                     
                 }
             }
@@ -55,13 +67,20 @@ struct ContentView: View {
                            .foregroundColor(Color("yellow"))
                            .frame(width: 350, height: 150)
                            .padding()
+                        .onTapGesture {
+                            self.showLib.toggle()
+                            self.useCamera = false
+                        }
                 HStack{
                 Image(systemName: "photo.fill.on.rectangle.fill")
                     .foregroundColor(.white)
                     .font(.title)
-                Text("From library")
-                        .foregroundColor(.white)
-                        .font(.title)
+                    
+                NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showLib) {
+                                   Text("Library")
+                                       .foregroundColor(.white)
+                                       .font(.title)
+                               }
                         
                     }
             }
@@ -106,13 +125,14 @@ struct ContentView: View {
                     
                 }
             }
-            
+       Spacer(minLength: 100)
     }
 }
-
+    }
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-}
+
