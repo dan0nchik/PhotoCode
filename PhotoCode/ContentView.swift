@@ -43,15 +43,14 @@ struct ContentView: View {
                 .frame(width: 150, height: 150)
                 .padding()
                 .onTapGesture {
-                    self.showCamera.toggle()
+                    self.showCamera = true
                     self.useCamera = true
                 }
             VStack{
             Image(systemName: "camera.fill")
                 .foregroundColor(.white)
                 .font(.title)
-                
-                NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showCamera) {
+                NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showCamera.animation()) {
                     Text("Camera")
                         .foregroundColor(.white)
                         .font(.title)
@@ -68,7 +67,7 @@ struct ContentView: View {
                            .frame(width: 350, height: 150)
                            .padding()
                         .onTapGesture {
-                            self.showLib.toggle()
+                            self.showLib = true
                             self.useCamera = false
                         }
                 HStack{
@@ -76,7 +75,7 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .font(.title)
                     
-                NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showLib) {
+                    NavigationLink(destination: Scan(useCamera: $useCamera), isActive: $showLib.animation()x) {
                                    Text("Library")
                                        .foregroundColor(.white)
                                        .font(.title)
@@ -120,7 +119,7 @@ struct ContentView: View {
                             .font(.title)
                             
                         }
-                }
+                }                
                 Spacer()
                     
                 }

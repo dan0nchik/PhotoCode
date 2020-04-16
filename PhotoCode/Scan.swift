@@ -24,6 +24,7 @@ struct Scan: View {
                 }, label: {
                     Text("Scan!")
                 })
+                
             }
             if (showCaptureImageView) {
               CaptureImageView(isShown: $showCaptureImageView, image: $image, camera: $useCamera)
