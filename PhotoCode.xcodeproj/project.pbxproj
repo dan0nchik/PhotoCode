@@ -28,6 +28,7 @@
 		6960AE1824471F2100EFB32B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6960AE1E2447253300EFB32B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6960AE202447256E00EFB32B /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
+		6990F7D9244868DF00AA9933 /* Screen Shot 2020-04-16 at 1.20.03 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2020-04-16 at 1.20.03 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 				6960AE1E2447253300EFB32B /* Coordinator.swift */,
 				6960AE0E24471F2000EFB32B /* ContentView.swift */,
 				6960AE1024471F2100EFB32B /* Assets.xcassets */,
+				6990F7D9244868DF00AA9933 /* Screen Shot 2020-04-16 at 1.20.03 PM.png */,
 				6960AE1524471F2100EFB32B /* LaunchScreen.storyboard */,
 				6960AE1824471F2100EFB32B /* Info.plist */,
 				6960AE1224471F2100EFB32B /* Preview Content */,
