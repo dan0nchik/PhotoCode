@@ -11,7 +11,7 @@ struct Scan: View {
     @Binding var useCamera: Bool
     @State var showCaptureImageView=false
     @State var image: Image? = nil
-    @State var result: String? = nil
+    @State var result: String? = "No text"
     var body: some View {
         ZStack {
             VStack {
@@ -21,12 +21,14 @@ struct Scan: View {
                     .aspectRatio(contentMode: .fit)
                 Button(action: {
                     self.result = callOCRSpace(image: self.image)!
-                    
+                    print(self.result ?? "No text(")
                 }, label: {
                     Text("Scan!")
                 })
-                
-                
+                Text(result!)
+                .bold()
+                .foregroundColor(.black)
+                .lineLimit(nil)
             }
             if (showCaptureImageView) {
                 CaptureImageView(isShown: $showCaptureImageView, image: $image, camera: $useCamera)
@@ -74,7 +76,7 @@ extension CaptureImageView: UIViewControllerRepresentable {
     }
 }
 
-func callOCRSpace(image: Image?) -> String?{
+func callOCRSpace(image: Image?) -> String!{
     var final = ""
     // Create URL request
     let url = URL(string: "https://api.ocr.space/Parse/Image")
@@ -89,11 +91,11 @@ func callOCRSpace(image: Image?) -> String?{
     let session = URLSession.shared
     
     // Image file and parameters
-    let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 0.6)
+    let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 1)
     let parametersDictionary = ["apikey" : "9ae1728a2c88957", "isOverlayRequired" : "True", "language" : "eng"]
     
     // Create multipart form body
-    let data = createBody(withBoundary: boundary, parameters: parametersDictionary, imageData: imageData, filename: "test.jpg")
+    let data = createBody(withBoundary: boundary, parameters: parametersDictionary, imageData: imageData, filename: "test.png")
     
     request?.httpBody = data
     
@@ -109,13 +111,14 @@ func callOCRSpace(image: Image?) -> String?{
             } catch let myError {
                 print(myError)
             }
+            //print(result!)
             if let res = result!["ParsedResults"] as? [[String:Any]],
                 let text = res.first{
                 let output = text["ParsedText"].unsafelyUnwrapped
+                //print(output)
                 final = output as! String
                 print(final)
             }
-            
         })
     }
     task?.resume()
